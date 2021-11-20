@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/item_amigos"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    app:cardBackgroundColor="@android:color/transparent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/ly_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_toLeftOf="@+id/ly_contain_tools"
+            android:layout_centerVertical="true">
+
+            <CheckBox
+                android:id="@+id/cb_task_ready"
+                android:text="Descripcion"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp" />
+
+        </LinearLayout>
+
+<!--        <TextView
+            android:id="@+id/txt_description"
+            style="@style/normalTextFont"
+            android:text="Descripcion"
+            android:layout_toEndOf="@+id/ly_checkbox"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/fifteen"/>-->
+
+        <LinearLayout
+            android:id="@+id/ly_contain_tools"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/img_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_lines_twenty"
+                android:src="@drawable/ic_edit"/>
+
+            <ImageView
+                android:id="@+id/img_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_lines_twenty"
+                android:src="@drawable/ic_trash"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grisClaro"
+            android:layout_alignParentBottom="true"/>
+
+    </RelativeLayout>
+
+</LinearLayout>
