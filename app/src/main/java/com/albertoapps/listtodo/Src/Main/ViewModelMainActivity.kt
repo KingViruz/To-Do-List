@@ -17,9 +17,19 @@ class ViewModelMainActivity (
     val listTask: LiveData<ArrayList<String>>
         get() = _listTasks
 
+    fun searchTask(texto:String){
+        
+        val newData:ArrayList<String> = arrayOfTasks.filter {
+            it.toLowerCase().contains(texto)
+        } as ArrayList<String>
+
+        _listTasks.value = newData
+
+    }
+
     fun addNewTask(arrayList: ArrayList<String>){
         viewModelScope.launch {
-
+            arrayOfTasks = arrayList
             _listTasks.value = arrayList
         }
     }

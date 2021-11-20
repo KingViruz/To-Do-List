@@ -1,49 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white">
 
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="16dp">
+        android:layout_height="wrap_content">
 
-        <include
-            android:id="@+id/title_list_to_do"
-            layout="@layout/title"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="16dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            style="@style/mainFont"
-            android:layout_centerInParent="true"
-            android:text="No hay tareas pendientes"/>
+            <include
+                android:id="@+id/title_list_to_do"
+                layout="@layout/title"/>
 
-        <androidx.recyclerview.widget.RecyclerView
-            style="@style/recyclerView"
-            android:id="@+id/rv_list_task"
-            android:layout_marginTop="@dimen/space_lines_twenty"
-            android:layout_marginBottom="@dimen/ten"
-            android:layout_marginHorizontal="@dimen/margin_sides"
-            tools:itemCount="15"
-            android:layout_below="@+id/title_list_to_do"
-            android:layout_above="@+id/add_new_task"
-            tools:listitem="@layout/item_list_to_do"/>
+            <include
+                android:id="@+id/sv_list_to_do"
+                android:layout_below="@+id/title_list_to_do"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="@dimen/space_lines_twenty"
+                layout="@layout/search_view"/>
 
-        <ImageView
-            android:id="@+id/add_new_task"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="8dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:src="@drawable/btn_add"
-            />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                style="@style/mainFont"
+                android:layout_centerInParent="true"
+                android:text="No hay tareas pendientes"/>
 
-    </RelativeLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                style="@style/recyclerView"
+                android:id="@+id/rv_list_task"
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/space_lines_twenty"
+                android:layout_marginBottom="@dimen/ten"
+                android:layout_marginHorizontal="@dimen/margin_sides"
+                tools:itemCount="15"
+                android:layout_below="@+id/sv_list_to_do"
+                tools:listitem="@layout/item_list_to_do"/>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+    <ImageView
+        android:id="@+id/add_new_task"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="22dp"
+        android:layout_marginBottom="20dp"
+        android:src="@drawable/ic_add_task" />
 
 </RelativeLayout>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ly_search"
+    android:visibility="gone"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <EditText
+        android:id="@+id/edt_search"
+        android:inputType="text"
+        android:maxLines="1"
+        style="@style/edt_search"/>
+
+</LinearLayout>

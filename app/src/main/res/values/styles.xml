@@ -14,14 +14,49 @@
         <item name="android:textSize">@dimen/normal_size_text</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="mainFont">
         <item name="android:textSize">@dimen/title_size_text</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="mainFont.bold">
+        <item name="android:textSize">@dimen/title_size_text</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:textStyle">bold</item>
     </style>
+
+    <!--SearchView-->
+    <style name="edt_search" parent="normalTextFont">
+        <item name="android:background">@drawable/rounded_search_view</item>
+        <item name="android:layout_height">45dp</item>
+        <item name="android:paddingLeft">@dimen/space_lines_twenty</item>
+        <item name="android:paddingRight">@dimen/fifteen</item>
+        <item name="android:hint">Buscar</item>
+        <item name="android:drawableRight">@drawable/ic_buscar</item>
+    </style>
+
+    <!--BottomSheetTheme-->
+    <style name="BottomSheetShapeAppearance" parent="ShapeAppearance.MaterialComponents.LargeComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">16dp</item>
+        <item name="cornerSizeTopRight">16dp</item>
+    </style>
+
+    <style name="BottomSheetModal" parent="Widget.Design.BottomSheet.Modal">
+        <item name="shapeAppearance">@style/BottomSheetShapeAppearance</item>
+        <item name="android:maxWidth">350dp</item>
+    </style>
+
+    <style name="BaseBottomSheetEdit" parent="Theme.MaterialComponents.DayNight.BottomSheetDialog">
+        <item name="android:windowIsFloating">false</item>
+        <item name="bottomSheetStyle">@style/BottomSheetModal</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+
+    <style name="BottomSheetEditTheme" parent="@style/BaseBottomSheetEdit" />
 
 </resources>
