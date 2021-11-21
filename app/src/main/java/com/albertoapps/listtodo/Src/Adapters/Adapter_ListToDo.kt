@@ -58,7 +58,7 @@ class Adapter_ListToDo( val context: Context,
         }
         
         holder.imgEdit.setOnClickListener {
-            val bottomSheetFiltro = BottomSheetEditDescription(
+            val bottomSheetEditar = BottomSheetEditDescription(
                 context,
                 infoListToDo.descripcion,
                 object : BottomSheetEditDescription.interfaceEditarDescripcion{
@@ -68,7 +68,7 @@ class Adapter_ListToDo( val context: Context,
                     }
                 }
             )
-            bottomSheetFiltro.show(supportFragmentManager, "BottomSheetEdit")
+            bottomSheetEditar.show(supportFragmentManager, "BottomSheetEdit")
         }
 
         holder.imgDelete.setOnClickListener {

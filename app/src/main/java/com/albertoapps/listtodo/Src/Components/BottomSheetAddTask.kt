@@ -1,7 +1,6 @@
 package com.albertoapps.listtodo.Src.Components
 
 import android.content.Context
-import android.content.DialogInterface
 import android.os.Bundle
 import android.text.Editable
 import android.view.LayoutInflater
@@ -12,16 +11,15 @@ import com.albertoapps.listtodo.R
 import com.albertoapps.listtodo.databinding.BottomsheetGeneralBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class BottomSheetEditDescription (context: Context, descripcion: String,interfaz: interfaceEditarDescripcion) : BottomSheetDialogFragment() {
+class BottomSheetAddTask (context: Context, interfaz: interfaceAddTask) : BottomSheetDialogFragment() {
 
-    private var interfazEditTxt = interfaz
-    private var txt_editado = ""
-    private var descripcion = descripcion
+    private var interfazAddTask = interfaz
+    private var txtNewTask = ""
     private lateinit var binding: BottomsheetGeneralBinding
     var contexto = context
 
-    interface interfaceEditarDescripcion {
-        fun resultado_texto(descripcion: String)
+    interface interfaceAddTask {
+        fun giveBack(descripcion: String)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,15 +39,14 @@ class BottomSheetEditDescription (context: Context, descripcion: String,interfaz
     ): View? {
         binding = BottomsheetGeneralBinding.inflate(inflater, container, false)
 
-        binding.etDescription.text = Editable.Factory.getInstance().newEditable(descripcion)
         binding.etDescription.requestFocus()
         showKeyboard()
 
         binding.sendText.setOnClickListener {
 
             if (!binding.etDescription.text.toString().equals("")){
-                txt_editado = binding.etDescription.text.toString()
-                editDescription()
+                txtNewTask = binding.etDescription.text.toString()
+                addNewTask()
                 binding.etDescription.clearFocus()
                 closeKeyboard()
                 dismiss()
@@ -57,13 +54,6 @@ class BottomSheetEditDescription (context: Context, descripcion: String,interfaz
         }
 
         return binding.root
-    }
-
-    override fun onDismiss(dialog: DialogInterface) {
-        super.onDismiss(dialog)
-
-        closeKeyboard()
-
     }
 
     fun showKeyboard() {
@@ -78,9 +68,9 @@ class BottomSheetEditDescription (context: Context, descripcion: String,interfaz
         inputMethodManager.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0)
     }
 
-    fun editDescription(){
+    fun addNewTask(){
 
-        interfazEditTxt.resultado_texto(txt_editado)
+        interfazAddTask.giveBack(txtNewTask)
 
     }
 

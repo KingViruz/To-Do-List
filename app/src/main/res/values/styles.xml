@@ -51,12 +51,12 @@
         <item name="android:maxWidth">350dp</item>
     </style>
 
-    <style name="BaseBottomSheetEdit" parent="Theme.MaterialComponents.DayNight.BottomSheetDialog">
+    <style name="BaseBottomSheetGeneral" parent="Theme.MaterialComponents.DayNight.BottomSheetDialog">
         <item name="android:windowIsFloating">false</item>
         <item name="bottomSheetStyle">@style/BottomSheetModal</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 
-    <style name="BottomSheetEditTheme" parent="@style/BaseBottomSheetEdit" />
+    <style name="BottomSheetGeneralTheme" parent="@style/BaseBottomSheetGeneral" />
 
 </resources>

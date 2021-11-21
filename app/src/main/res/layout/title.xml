@@ -35,13 +35,13 @@
         android:layout_height="1dp"
         android:layout_marginTop="4dp"
         android:layout_marginHorizontal="16dp"
-        android:background="@color/red"/>
+        android:background="@color/dark_red"/>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="4dp"
         android:layout_marginHorizontal="16dp"
-        android:background="@color/red"/>
+        android:background="@color/dark_red"/>
 
 </LinearLayout>

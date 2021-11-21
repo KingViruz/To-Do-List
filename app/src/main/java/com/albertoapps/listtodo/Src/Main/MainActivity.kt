@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.albertoapps.listtodo.Data.Modelos.ListToDo
 import com.albertoapps.listtodo.Src.Adapters.Adapter_ListToDo
+import com.albertoapps.listtodo.Src.Components.BottomSheetAddTask
+import com.albertoapps.listtodo.Src.Components.BottomSheetEditDescription
 import com.albertoapps.listtodo.databinding.ActivityListToDoBinding
 
 class MainActivity : AppCompatActivity(), Adapter_ListToDo.OnClickInterface, Adapter_ListToDo.OnClickInterfacePosition, Adapter_ListToDo.OnClickInterfaceCheck {
@@ -60,13 +62,20 @@ class MainActivity : AppCompatActivity(), Adapter_ListToDo.OnClickInterface, Ada
     }
 
     fun addNewTask(){
-        var cont = 0
+
         binding.addNewTask.setOnClickListener {
 
-            val list = ListToDo("pollo" + cont++, false)
-            arrayOfTasks.add(list)
-            viewModelMainActivity.addNewTask(arrayOfTasks)
-
+            val bottomSheetAddNewTask = BottomSheetAddTask(
+                this,
+                object : BottomSheetAddTask.interfaceAddTask{
+                    override fun giveBack(descripcion: String) {
+                        val list = ListToDo(descripcion, false)
+                        arrayOfTasks.add(list)
+                        viewModelMainActivity.addNewTask(arrayOfTasks)
+                    }
+                }
+            )
+            bottomSheetAddNewTask.show(supportFragmentManager, "BottomSheetEdit")
         }
     }
 
