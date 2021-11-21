@@ -35,7 +35,7 @@ class Adapter_ListToDo( val context: Context,
     }
 
     interface OnClickInterface {
-        fun onClickItemAdapterItemList()
+        fun onClickItemAdapterItemList(listActividades: ArrayList<ListToDo>)
     }
 
     interface OnClickInterfaceCheck {
@@ -79,7 +79,7 @@ class Adapter_ListToDo( val context: Context,
 
             builder.setPositiveButton(R.string.accept) { dialog, which ->
                 ListActividades.remove(infoListToDo)
-                onClickInterface.onClickItemAdapterItemList()
+                onClickInterface.onClickItemAdapterItemList(ListActividades)
             }
 
             builder.setNegativeButton(R.string.cancel) { dialog, which ->

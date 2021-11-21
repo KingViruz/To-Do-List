@@ -1,26 +1,25 @@
 package com.albertoapps.listtodo.Src.Components
 
 import android.content.Context
+import android.content.DialogInterface
 import android.os.Bundle
 import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import com.albertoapps.listtodo.Data.Modelos.ListToDo
 import com.albertoapps.listtodo.R
+import com.albertoapps.listtodo.Src.Main.ViewModelMainActivity
 import com.albertoapps.listtodo.databinding.BottomsheetGeneralBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class BottomSheetAddTask (context: Context, interfaz: interfaceAddTask) : BottomSheetDialogFragment() {
+class BottomSheetAddTask (context: Context, viewmodel: ViewModelMainActivity) : BottomSheetDialogFragment() {
 
-    private var interfazAddTask = interfaz
+    private var viewmodel = viewmodel
     private var txtNewTask = ""
     private lateinit var binding: BottomsheetGeneralBinding
     var contexto = context
-
-    interface interfaceAddTask {
-        fun giveBack(descripcion: String)
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,18 +41,31 @@ class BottomSheetAddTask (context: Context, interfaz: interfaceAddTask) : Bottom
         binding.etDescription.requestFocus()
         showKeyboard()
 
+        binding.lyAddCatSentence.setOnClickListener {
+            viewmodel.getCatSentences(viewmodel.arrayOfTasks)
+            dismiss()
+        }
+
         binding.sendText.setOnClickListener {
 
             if (!binding.etDescription.text.toString().equals("")){
                 txtNewTask = binding.etDescription.text.toString()
-                addNewTask()
+                val list = ListToDo(txtNewTask, false)
+                viewmodel.arrayOfTasks.add(list)
+                viewmodel.addNewTask(viewmodel.arrayOfTasks)
                 binding.etDescription.clearFocus()
-                closeKeyboard()
                 dismiss()
             }
         }
 
         return binding.root
+    }
+
+    override fun onDismiss(dialog: DialogInterface) {
+        super.onDismiss(dialog)
+
+        closeKeyboard()
+
     }
 
     fun showKeyboard() {
@@ -66,12 +78,6 @@ class BottomSheetAddTask (context: Context, interfaz: interfaceAddTask) : Bottom
         val inputMethodManager: InputMethodManager =
             contexto.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0)
-    }
-
-    fun addNewTask(){
-
-        interfazAddTask.giveBack(txtNewTask)
-
     }
 
 }

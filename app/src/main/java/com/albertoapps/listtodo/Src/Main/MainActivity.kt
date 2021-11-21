@@ -23,7 +23,6 @@ class MainActivity : AppCompatActivity(), Adapter_ListToDo.OnClickInterface, Ada
     private lateinit var recyclerViewListToDo: RecyclerView
     private var showSearchview = false
     private var viewModelMainActivity = ViewModelMainActivity(this)
-    var arrayOfTasks: ArrayList<ListToDo> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,17 +64,9 @@ class MainActivity : AppCompatActivity(), Adapter_ListToDo.OnClickInterface, Ada
 
         binding.addNewTask.setOnClickListener {
 
-            val bottomSheetAddNewTask = BottomSheetAddTask(
-                this,
-                object : BottomSheetAddTask.interfaceAddTask{
-                    override fun giveBack(descripcion: String) {
-                        val list = ListToDo(descripcion, false)
-                        arrayOfTasks.add(list)
-                        viewModelMainActivity.addNewTask(arrayOfTasks)
-                    }
-                }
-            )
+            val bottomSheetAddNewTask = BottomSheetAddTask(this, viewModelMainActivity)
             bottomSheetAddNewTask.show(supportFragmentManager, "BottomSheetEdit")
+
         }
     }
 
@@ -89,6 +80,7 @@ class MainActivity : AppCompatActivity(), Adapter_ListToDo.OnClickInterface, Ada
             recyclerViewListToDo.adapter = adapterListToDo
             recyclerViewListToDo.adapter?.notifyDataSetChanged()
 
+            if (it.size > 0) binding.txtTareasPendientes.visibility = View.GONE
         }
     }
 
@@ -107,16 +99,17 @@ class MainActivity : AppCompatActivity(), Adapter_ListToDo.OnClickInterface, Ada
     }
 
 
-    override fun onClickItemAdapterItemList() {
+    override fun onClickItemAdapterItemList(listActividades: ArrayList<ListToDo>) {
         recyclerViewListToDo.adapter?.notifyDataSetChanged()
+        if (listActividades.size == 0) binding.txtTareasPendientes.visibility = View.VISIBLE
     }
 
     override fun onClickItemAdapterGetPosition(position:Int, newDescription:String) {
-        arrayOfTasks[position].descripcion = newDescription
+        viewModelMainActivity.arrayOfTasks[position].descripcion = newDescription
     }
 
     override fun onClickItemAdapterCheckButton(position:Int, check:Boolean) {
-        arrayOfTasks[position].isChecked = check
+        viewModelMainActivity.arrayOfTasks[position].isChecked = check
     }
 
 }
