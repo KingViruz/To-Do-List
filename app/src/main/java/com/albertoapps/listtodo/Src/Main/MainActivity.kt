@@ -1,31 +1,27 @@
 package com.albertoapps.listtodo.Src.Main
 
 import android.content.Context
-import android.opengl.Visibility
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.Toast
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.albertoapps.listtodo.Data.Modelos.ListToDo
-import com.albertoapps.listtodo.R
 import com.albertoapps.listtodo.Src.Adapters.Adapter_ListToDo
 import com.albertoapps.listtodo.databinding.ActivityListToDoBinding
 
-class MainActivity : AppCompatActivity(), Adapter_ListToDo.OnClickInterface, Adapter_ListToDo.OnClickInterfacePosition {
+class MainActivity : AppCompatActivity(), Adapter_ListToDo.OnClickInterface, Adapter_ListToDo.OnClickInterfacePosition, Adapter_ListToDo.OnClickInterfaceCheck {
 
     private lateinit var binding: ActivityListToDoBinding
     private lateinit var adapterListToDo: Adapter_ListToDo
     private lateinit var recyclerViewListToDo: RecyclerView
     private var showSearchview = false
     private var viewModelMainActivity = ViewModelMainActivity(this)
-    var arrayOfTasks: ArrayList<String> = ArrayList()
+    var arrayOfTasks: ArrayList<ListToDo> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,25 +62,25 @@ class MainActivity : AppCompatActivity(), Adapter_ListToDo.OnClickInterface, Ada
     fun addNewTask(){
         var cont = 0
         binding.addNewTask.setOnClickListener {
-            arrayOfTasks.add("pollo" + cont++)
+
+            val list = ListToDo("pollo" + cont++, false)
+            arrayOfTasks.add(list)
             viewModelMainActivity.addNewTask(arrayOfTasks)
 
         }
-
     }
 
     fun loadListTask(context: Context){
 
         viewModelMainActivity.listTask.observe(this) {
 
-            adapterListToDo = Adapter_ListToDo(context, it, this, this,supportFragmentManager)
+            adapterListToDo = Adapter_ListToDo(context, it, this, this, this, supportFragmentManager)
 
             recyclerViewListToDo.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             recyclerViewListToDo.adapter = adapterListToDo
             recyclerViewListToDo.adapter?.notifyDataSetChanged()
 
         }
-
     }
 
     fun showSearchview(){
@@ -99,15 +95,19 @@ class MainActivity : AppCompatActivity(), Adapter_ListToDo.OnClickInterface, Ada
                 showSearchview = false
             }
         }
-
     }
+
 
     override fun onClickItemAdapterItemList() {
         recyclerViewListToDo.adapter?.notifyDataSetChanged()
     }
 
     override fun onClickItemAdapterGetPosition(position:Int, newDescription:String) {
-        arrayOfTasks[position] = newDescription
+        arrayOfTasks[position].descripcion = newDescription
+    }
+
+    override fun onClickItemAdapterCheckButton(position:Int, check:Boolean) {
+        arrayOfTasks[position].isChecked = check
     }
 
 }

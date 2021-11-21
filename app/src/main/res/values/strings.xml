@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">ListToDo</string>
     <string name="mis_actividades_pendientes">Mis actividades pendientes</string>
+    <string name="message_delete_task">¿Seguro que desea eliminar esta tarea?</string>
+    <string name="accept">Aceptar</string>
+    <string name="cancel">Cancelar</string>
 </resources>
