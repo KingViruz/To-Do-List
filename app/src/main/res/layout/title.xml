@@ -13,7 +13,7 @@
         android:orientation="horizontal">
 
         <TextView
-            style="@style/mainFont"
+            style="@style/mainFont.bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/mis_actividades_pendientes"

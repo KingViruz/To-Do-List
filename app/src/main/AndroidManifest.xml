@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_to_do_list_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ListToDo">
-        <activity android:name=".Src.Main.MainActivity">
+        <activity android:name=".Src.Main.MainActivity"/>
+        <activity android:name=".Src.Auth.Splashscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
