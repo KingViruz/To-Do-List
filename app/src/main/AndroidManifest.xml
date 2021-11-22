@@ -6,9 +6,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_to_do_list"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_to_do_list_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ListToDo">
         <activity android:name=".Src.Main.MainActivity">

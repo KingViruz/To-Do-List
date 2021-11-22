@@ -1,7 +1,9 @@
 <resources>
-    <string name="app_name">ListToDo</string>
+    <string name="app_name">To Do List</string>
     <string name="mis_actividades_pendientes">Mis actividades pendientes</string>
     <string name="message_delete_task">¿Seguro que desea eliminar esta tarea?</string>
     <string name="accept">Aceptar</string>
     <string name="cancel">Cancelar</string>
+    <string name="type_new_task">Digitar nueva tarea</string>
+    <string name="add_cat_sentences_randoms">Añadir frases de gatos aleatorias</string>
 </resources>

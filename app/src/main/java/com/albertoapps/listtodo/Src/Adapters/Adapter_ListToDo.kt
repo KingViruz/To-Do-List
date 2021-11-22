@@ -52,6 +52,7 @@ class Adapter_ListToDo( val context: Context,
 
             if (isChecked){
                 onClickInterfaceCheck.onClickItemAdapterCheckButton(position, true)
+
             } else {
                 onClickInterfaceCheck.onClickItemAdapterCheckButton(position, false)
             }

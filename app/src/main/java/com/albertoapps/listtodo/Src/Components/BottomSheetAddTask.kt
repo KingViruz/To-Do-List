@@ -18,6 +18,7 @@ class BottomSheetAddTask (context: Context, viewmodel: ViewModelMainActivity) : 
 
     private var viewmodel = viewmodel
     private var txtNewTask = ""
+    private var viewCatSentences = false
     private lateinit var binding: BottomsheetGeneralBinding
     var contexto = context
 
@@ -38,23 +39,38 @@ class BottomSheetAddTask (context: Context, viewmodel: ViewModelMainActivity) : 
     ): View? {
         binding = BottomsheetGeneralBinding.inflate(inflater, container, false)
 
+        binding.lyAddCatSentence.visibility = View.VISIBLE
+
         binding.etDescription.requestFocus()
         showKeyboard()
 
         binding.lyAddCatSentence.setOnClickListener {
-            viewmodel.getCatSentences(viewmodel.arrayOfTasks)
-            dismiss()
+
+            showOrHideViews()
+            changeTitleText()
         }
 
         binding.sendText.setOnClickListener {
 
-            if (!binding.etDescription.text.toString().equals("")){
-                txtNewTask = binding.etDescription.text.toString()
-                val list = ListToDo(txtNewTask, false)
-                viewmodel.arrayOfTasks.add(list)
-                viewmodel.addNewTask(viewmodel.arrayOfTasks)
-                binding.etDescription.clearFocus()
-                dismiss()
+            if (viewCatSentences){
+                if (validateNotEmptyText()) {
+                    var times: Int = binding.etNumCatSentences.text.toString().toInt() - 1
+
+                    for (i: Int in 0..times) {
+                        viewmodel.getCatSentences(viewmodel.arrayOfTasks)
+                    }
+
+                    dismiss()
+                }
+            } else {
+                if (validateNotEmptyText()){
+                    txtNewTask = binding.etDescription.text.toString()
+                    val list = ListToDo(txtNewTask, false)
+                    viewmodel.arrayOfTasks.add(list)
+                    viewmodel.addNewTask(viewmodel.arrayOfTasks)
+                    binding.etDescription.clearFocus()
+                    dismiss()
+                }
             }
         }
 
@@ -65,6 +81,45 @@ class BottomSheetAddTask (context: Context, viewmodel: ViewModelMainActivity) : 
         super.onDismiss(dialog)
 
         closeKeyboard()
+
+    }
+
+    fun validateNotEmptyText():Boolean{
+
+        return if (viewCatSentences){
+            !binding.etNumCatSentences.text.toString().equals("")
+        } else {
+            !binding.etDescription.text.toString().equals("")
+        }
+
+    }
+
+    fun changeTitleText(){
+
+        if (viewCatSentences){
+            binding.txtAddCatSentences.text = getString(R.string.type_new_task)
+        }
+        else {
+            binding.txtAddCatSentences.text = getString(R.string.add_cat_sentences_randoms)
+        }
+
+    }
+
+    fun showOrHideViews(){
+
+        if (!viewCatSentences){
+            binding.etNumCatSentences.visibility = View.VISIBLE
+            binding.etDescription.visibility = View.GONE
+            binding.txtCatSentences.visibility = View.VISIBLE
+            binding.etNumCatSentences.requestFocus()
+            viewCatSentences = true
+        } else {
+            binding.etNumCatSentences.visibility = View.GONE
+            binding.etDescription.visibility = View.VISIBLE
+            binding.txtCatSentences.visibility = View.GONE
+            binding.etDescription.requestFocus()
+            viewCatSentences = false
+        }
 
     }
 

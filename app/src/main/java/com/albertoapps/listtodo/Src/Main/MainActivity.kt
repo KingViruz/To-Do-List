@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity(), Adapter_ListToDo.OnClickInterface, Ada
     private var showSearchview = false
     private var viewModelMainActivity = ViewModelMainActivity(this)
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityListToDoBinding.inflate(layoutInflater)
@@ -109,7 +110,11 @@ class MainActivity : AppCompatActivity(), Adapter_ListToDo.OnClickInterface, Ada
     }
 
     override fun onClickItemAdapterCheckButton(position:Int, check:Boolean) {
-        viewModelMainActivity.arrayOfTasks[position].isChecked = check
+        try {
+            viewModelMainActivity.arrayOfTasks[position].isChecked = check
+        } catch (e:IndexOutOfBoundsException){
+            println(e)
+        }
     }
 
 }
